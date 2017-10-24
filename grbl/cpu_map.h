@@ -150,11 +150,11 @@
   // Define step pulse output pins.
   
   #define STEP_PORT_0 F
-  #define STEP_PORT_1 F
-  #define STEP_PORT_2 L
-  #define STEP_BIT_0 0  // X Step - Pin A0
-  #define STEP_BIT_1 6  // Y Step - Pin A6
-  #define STEP_BIT_2 3  // Z Step - Pin D46
+  #define STEP_PORT_2 F
+  #define STEP_PORT_1 L
+  #define STEP_BIT_0 0
+  #define STEP_BIT_2 6
+  #define STEP_BIT_1 3
   #define _STEP_BIT(i) STEP_BIT_##i
   #define STEP_BIT(i) _STEP_BIT(i)
   #define STEP_DDR(i) _DDR(STEP_PORT_##i)
@@ -164,11 +164,11 @@
 
   // Define step direction output pins.
   #define DIRECTION_PORT_0 F
-  #define DIRECTION_PORT_1 F
-  #define DIRECTION_PORT_2 L
-  #define DIRECTION_BIT_0 1 // X Dir - Pin A1
-  #define DIRECTION_BIT_1 7 // Y Dir - Pin A7
-  #define DIRECTION_BIT_2 1 // Z Dir - Pin D48
+  #define DIRECTION_PORT_2 F
+  #define DIRECTION_PORT_1 L
+  #define DIRECTION_BIT_0 1
+  #define DIRECTION_BIT_2 7
+  #define DIRECTION_BIT_1 1
   #define _DIRECTION_BIT(i) DIRECTION_BIT_##i
   #define DIRECTION_BIT(i) _DIRECTION_BIT(i)
   #define DIRECTION_DDR(i) _DDR(DIRECTION_PORT_##i)
@@ -178,11 +178,11 @@
 
   // Define stepper driver enable/disable output pin.
   #define STEPPER_DISABLE_PORT_0 D
-  #define STEPPER_DISABLE_PORT_1 F
-  #define STEPPER_DISABLE_PORT_2 K
-  #define STEPPER_DISABLE_BIT_0 7 // X Enable - Pin D38
-  #define STEPPER_DISABLE_BIT_1 2 // Y Enable - Pin A2
-  #define STEPPER_DISABLE_BIT_2 0 // Z Enable - Pin A8
+  #define STEPPER_DISABLE_PORT_2 F
+  #define STEPPER_DISABLE_PORT_1 K
+  #define STEPPER_DISABLE_BIT_0 7
+  #define STEPPER_DISABLE_BIT_2 2
+  #define STEPPER_DISABLE_BIT_1 0
   #define STEPPER_DISABLE_BIT(i) STEPPER_DISABLE_BIT_##i
   #define STEPPER_DISABLE_DDR(i) _DDR(STEPPER_DISABLE_PORT_##i)
   #define STEPPER_DISABLE_PORT(i) _PORT(STEPPER_DISABLE_PORT_##i)
@@ -190,11 +190,11 @@
 
   // Define homing/hard limit switch input pins and limit interrupt vectors. 
   #define MIN_LIMIT_PORT_0 E
-  #define MIN_LIMIT_PORT_1 J
-  #define MIN_LIMIT_PORT_2 D
-  #define MIN_LIMIT_BIT_0 5 // X Limit Min - Pin D3
-  #define MIN_LIMIT_BIT_1 1 // Y Limit Min - Pin D14
-  #define MIN_LIMIT_BIT_2 3 // Z Limit Min - Pin D18
+  #define MIN_LIMIT_PORT_2 J
+  #define MIN_LIMIT_PORT_1 D
+  #define MIN_LIMIT_BIT_0 5
+  #define MIN_LIMIT_BIT_2 1
+  #define MIN_LIMIT_BIT_1 3
   #define _MIN_LIMIT_BIT(i) MIN_LIMIT_BIT_##i
   #define MIN_LIMIT_BIT(i) _MIN_LIMIT_BIT(i)
   #define MIN_LIMIT_DDR(i) _DDR(MIN_LIMIT_PORT_##i)
@@ -202,11 +202,11 @@
   #define MIN_LIMIT_PIN(i) _PIN(MIN_LIMIT_PORT_##i)
 
   #define MAX_LIMIT_PORT_0 E
-  #define MAX_LIMIT_PORT_1 J
-  #define MAX_LIMIT_PORT_2 D
-  #define MAX_LIMIT_BIT_0 4 // X Limit Max - Pin D2
-  #define MAX_LIMIT_BIT_1 0 // Y Limit Max - Pin D15
-  #define MAX_LIMIT_BIT_2 2 // Z Limit Max - Pin D19
+  #define MAX_LIMIT_PORT_2 J
+  #define MAX_LIMIT_PORT_1 D
+  #define MAX_LIMIT_BIT_0 4
+  #define MAX_LIMIT_BIT_2 0
+  #define MAX_LIMIT_BIT_1 2
   #define _MAX_LIMIT_BIT(i) MAX_LIMIT_BIT_##i
   #define MAX_LIMIT_BIT(i) _MAX_LIMIT_BIT(i)
   #define MAX_LIMIT_DDR(i) _DDR(MAX_LIMIT_PORT_##i)

@@ -121,30 +121,26 @@ uint8_t limits_get_state()
 {
   uint8_t limit_state = 0;
   #ifdef DEFAULTS_RAMPS_BOARD
-    uint8_t pin;
+    uint8_t pinMin=0,pinMax=0;
     uint8_t idx;
-    #ifdef INVERT_LIMIT_PIN_MASK
-      #error "INVERT_LIMIT_PIN_MASK is not implemented"
-    #endif
     for (idx=0; idx<N_AXIS; idx++) {
-      pin = *max_limit_pins[idx] & (1<<max_limit_bits[idx]);
-      pin = !!pin;
-      if (bit_isfalse(settings.flags,BITFLAG_INVERT_LIMIT_PINS)) { pin = !pin; }
-      #ifdef INVERT_MAX_LIMIT_PIN_MASK
-        if (bit_istrue(INVERT_MAX_LIMIT_PIN_MASK, bit(idx))) { pin = !pin; }
-      #endif
-      if (pin)
-        limit_state |= (1 << idx);
-      pin = *min_limit_pins[idx] & (1<<min_limit_bits[idx]);
-      pin = !!pin;
-      if (bit_isfalse(settings.flags,BITFLAG_INVERT_LIMIT_PINS)) { pin = !pin; }
-      #ifdef INVERT_MIN_LIMIT_PIN_MASK
-        if (bit_istrue(INVERT_MIN_LIMIT_PIN_MASK, bit(idx))) { pin = !pin; }
-      #endif
-      if (pin)
-        limit_state |= (1 << idx);
-    } 
-    return(limit_state);
+      uint8_t pin = (*max_limit_pins[idx]>>max_limit_bits[idx]) & 1;
+      pinMax |= pin<<idx;
+      pin = (*min_limit_pins[idx]>>min_limit_bits[idx]) & 1;
+      pinMin |= pin<<idx;
+    }
+    #ifdef INVERT_MAX_LIMIT_PIN_MASK
+      pinMax ^= INVERT_MAX_LIMIT_PIN_MASK;
+    #endif
+    #ifdef INVERT_MIN_LIMIT_PIN_MASK
+      pinMin ^= INVERT_MIN_LIMIT_PIN_MASK;
+    #endif
+    limit_state = pinMax; // | pinMin ; OR doesn't work if the zeros are supposed to dominate!
+    if (bit_isfalse(settings.flags,BITFLAG_INVERT_LIMIT_PINS)) { limit_state ^= 7; }
+    #ifdef INVERT_LIMIT_PIN_MASK
+      limit_state ^= INVERT_LIMIT_PIN_MASK;
+    #endif
+
   #else
     uint8_t pin = (LIMIT_PIN & LIMIT_MASK);
     #ifdef INVERT_LIMIT_PIN_MASK
@@ -157,8 +153,8 @@ uint8_t limits_get_state()
         if (pin & get_limit_pin_mask(idx)) { limit_state |= (1 << idx); }
       }
     }
-    return(limit_state);
   #endif //DEFAULTS_RAMPS_BOARD
+  return(limit_state);
 }
 
 #ifdef DEFAULTS_RAMPS_BOARD
